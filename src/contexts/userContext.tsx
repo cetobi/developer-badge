@@ -1,21 +1,21 @@
 import { createContext, useState } from 'react'
 
 interface UserContextProps {
-    link: string,
-    save: (link: string) => void
+    nickname: string,
+    save: (nickname: string) => void
 }
 
 export const UserContext = createContext<UserContextProps | undefined> (undefined)
 
 export default function UserProvider ({ children }: any) {
-    const [link, setLink] = useState<string>('')
+    const [nickname, setNickname] = useState<string>('')
     const contextValue: UserContextProps = {
-        link,
-        save: saveLink,
+        nickname,
+        save: saveNickname,
     }
 
-    function saveLink(link: string){
-        setLink(link)
+    function saveNickname(nickname: string){
+        setNickname(nickname)
     }
     return (
         <UserContext.Provider value={contextValue}>

@@ -1,21 +1,21 @@
 import React, { useContext, useState } from 'react';
 import { View, Text, TextInput } from 'react-native';
-// import { UserContext } from '../../contexts/userContext';
+import { UserContext } from '../../contexts/userContext';
 
 import { styles } from './HomeStyle';
 
-import { BottomRoutes } from '../../routes/bottomRoutes';
+export function Home({ navigation }: any) {
+  const [nickname, setNickname] = useState('')
+  const userContext = useContext(UserContext);
 
-export function Home({navigation}: any) {
-  // const [nickname, setNickname] = useState('')
-  // const userContext = useContext(UserContext);
+  function navigateToFrontScreen() {
+    const trimNickname = nickname.trim().toLowerCase();
+    setNickname(trimNickname)
 
-  // function handleNickname(nickname: string) {
-  //   setNickname(nickname)
-  // }
-
-  function navigateToFrontScreen(){
-    // userContext?.save(nickname)
+    if (trimNickname !== '') {
+      userContext?.save(trimNickname)
+      navigation.navigate('Bottom', { screen: 'Front' })
+    }
   }
 
   return (
@@ -25,12 +25,11 @@ export function Home({navigation}: any) {
       <TextInput
         style={styles.input}
         placeholder='GitHub nickname...'
-        // value={nickname}
-        // onChangeText={(text) => setNickname(text)}
+        value={nickname}
+        onChangeText={(text) => setNickname(text)}
       />
 
-      <Text style={styles.button}         
-      onPress={() => navigation.navigate('Bottom', { screen: 'Front' })}>Create</Text>
+      <Text style={styles.button} onPress={navigateToFrontScreen}>Create</Text>
     </View>
   );
 }

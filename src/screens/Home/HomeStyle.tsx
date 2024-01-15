@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 100,
+    // marginTop: 100,
   },
   input: {
     width: 300,

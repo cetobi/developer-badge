@@ -1,10 +1,11 @@
 import axios from 'axios';
 
-export const getUser = async () => {
+export const getUser = async (nickname: string) => {
     try {
-        const response: any = await axios.get('https://api.github.com/users/cetobi');
+        const response: any = await axios.get(`https://api.github.com/users/${nickname}`);
         return response.data;
     } catch (error) {
         console.error(error);
+        return null;
     }
 }

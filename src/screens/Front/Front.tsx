@@ -9,11 +9,11 @@ import { styles } from './FrontStyle';
 export function Front() {
   const [user, setUser] = useState<any>(null);
   const UserContextValue = useContext(UserContext);
-  const value = UserContextValue?.link || 'Not Found'
+  const value = UserContextValue?.nickname || 'Not Found'
 
   useEffect(() => {
     const fetchUser = async () => {
-      const user = await getUser();
+      const user = await getUser(value);
       setUser(user);
     };
     fetchUser();
@@ -21,7 +21,7 @@ export function Front() {
 
   return (
     <>
-      {user && (
+      {user ? (
         <View style={styles.container}>
           <View style={styles.infoUser}>
             <View>
@@ -31,7 +31,7 @@ export function Front() {
                 }}
               />
             </View>
-            <Text style={styles.name}>{user.name}</Text>
+            <Text style={styles.name}>{value}</Text>
             <Text style={styles.bio}>{user.bio}</Text>
           </View>
           <View style={styles.qrcode}>
@@ -40,6 +40,10 @@ export function Front() {
               size={200}
             />
           </View>
+        </View>
+      ) : (
+        <View style={styles.container}>
+          <Text>User not found!</Text>
         </View>
       )}
     </>
