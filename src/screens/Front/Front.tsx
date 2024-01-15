@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import QRCode from "react-qr-code";
 import { View, Text, Image } from 'react-native';
 import { getUser } from '../../services/githubAPI';
-import QRCode from "react-qr-code";
+import { UserContext } from '../../contexts/userContext';
 
 import { styles } from './FrontStyle';
 
 export function Front() {
   const [user, setUser] = useState<any>(null);
+  const UserContextValue = useContext(UserContext);
+  const value = UserContextValue?.link || 'Not Found'
 
   useEffect(() => {
     const fetchUser = async () => {
