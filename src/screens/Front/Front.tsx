@@ -31,7 +31,7 @@ export function Front() {
                 }}
               />
             </View>
-            <Text style={styles.name}>{value}</Text>
+            <Text style={styles.name}>{user.name}</Text>
             <Text style={styles.bio}>{user.bio}</Text>
           </View>
           <View style={styles.qrcode}>
