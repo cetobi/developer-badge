@@ -39,6 +39,7 @@ export function Back() {
           });
         });
 
+        // console.log(languages);
         setLanguages(languages);
       } catch (error: any) {
         console.error(error.message);
@@ -53,12 +54,14 @@ export function Back() {
   ))
 
   const percent = (num: number) => {
-    return Math.round((num * 100) / totalValue)
+    return ((num * 100) / totalValue).toFixed(2)
   }
 
   return (
     <View style={styles.container}>
-      {Object.entries(languages).map(([key, value]) => (
+      {Object.entries(languages)
+      .sort(([, valueA], [, valueB]) => Number(valueB) - Number(valueA))
+      .map(([key, value]) => (
         <TechCard language={key} value={percent(Number(value))} />
       ))}
     </View>
