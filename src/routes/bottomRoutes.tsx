@@ -11,6 +11,10 @@ export function BottomRoutes() {
         <Navigator>
             <Screen name="Front" component={Front}
                 options={{
+                    tabBarLabelStyle: {
+                        fontSize: 15,
+                        fontWeight: 'bold',
+                    },
                     tabBarIcon: () => (
                         <AntDesign name="user" size={20} color="black" />
                     ),
@@ -18,6 +22,10 @@ export function BottomRoutes() {
             />
             <Screen name="Back" component={Back}
                 options={{
+                    tabBarLabelStyle: {
+                        fontSize: 15,
+                        fontWeight: 'bold',
+                    },
                     tabBarIcon: () => (
                         <AntDesign name="idcard" size={24} color="black" />),
                 }}
