@@ -17,14 +17,12 @@ export function Back() {
         const user = await getUser(value);
         const repos = await getReposUser(user.repos_url)
 
-        const nameRepos = repos.map((repo: any) => repo.name)
-        const languageRepos = []
-        
-        // get the languages used and add the variable
-        for (let i = 0; i < nameRepos.length; i++) {
-          const objLanguage = await getLanguageReposUser(value, nameRepos[i])
-          languageRepos.push(objLanguage)
-        }
+        const promises = repos.map(async (repo: any) => {
+          const objLanguage = await getLanguageReposUser(value, repo.name);
+          return objLanguage;
+        });
+    
+        const languageRepos = await Promise.all(promises);
 
 
         const languages: any = {};
@@ -61,8 +59,9 @@ export function Back() {
     <View style={styles.container}>
       {Object.entries(languages)
       .sort(([, valueA], [, valueB]) => Number(valueB) - Number(valueA))
+      .slice(0, 6)
       .map(([key, value]) => (
-        <TechCard language={key} value={percent(Number(value))} />
+        <TechCard key={key} language={key} value={percent(Number(value))} />
       ))}
     </View>
   );
